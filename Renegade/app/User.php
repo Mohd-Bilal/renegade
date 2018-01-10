@@ -25,7 +25,7 @@ class User extends \TCG\Voyager\Models\User
     ];
     use \Illuminate\Auth\Authenticatable;
     public function posts(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Post','author_id');
 
     }
     public function likes(){

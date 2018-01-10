@@ -15,14 +15,14 @@ use App\Events\MessagePosted;
 
     Route::get('/', function () {
         return view('welcome');
-    })->name('login');
+    })->name('welcome');
 
     Route::get('signup', function () {
         return view('signup');
     });
     Route::get('signin', function () {
         return view('signin');
-    });
+    })->name('signin');
     Route::post('postsignup',[
         'uses' => 'UserController@Signup',
         'as' =>'postsignup'

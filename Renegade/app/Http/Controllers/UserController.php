@@ -39,14 +39,15 @@ class UserController extends Controller{
         $user->password=$password;
         $user->first_name=$request['first_name'];
         $user->last_name=$request['last_name'];
+        $user->name=$request['first_name'];
         $user->gender=$request['gender'];
         $user->channel=$request['channel'];
         $user->username=$request['username'];
         $user->interest=serialize($interest);
         if($user->gender=='male')
-          $user->imageurl='/src/img/dummymale.jpg';
+          $user->avatar='/src/img/dummymale.jpg';
         else
-          $user->imageurl='/src/img/dummyfemale.jpeg';  
+          $user->avatar='/src/img/dummyfemale.jpeg';  
         $user->save();
         Auth::login($user);
         return redirect()->route('dashboard');
@@ -81,7 +82,7 @@ class UserController extends Controller{
     public function getLogout()
     {
       Auth::logout();
-      return redirect()->route('login');
+      return redirect()->route('welcome');
     }
 
   public function getAccount()
@@ -102,7 +103,7 @@ class UserController extends Controller{
     $file = $request->file('image');
     $filename =$request['first_name'] . '-' .$user->id . '.jpg';
     if($file){
-      $user->imageurl= '/storage/'.$filename;
+      $user->avatar= '/storage/'.$filename;
     }
 
     $user->save();
@@ -205,9 +206,9 @@ public function socialup(Request $request){
   $user->username=$request['username'];
   $user->interest=serialize($interest);
   if($user->gender='male')
-    $user->imageurl='/src/img/dummymale.jpg';
+    $user->avatar='/src/img/dummymale.jpg';
   else
-    $user->imageurl='/src/img/dummyfemale.jpg';
+    $user->avatar='/src/img/dummyfemale.jpg';
   $user->save();
   Auth::login($user);
   return redirect()->route('dashboard');
